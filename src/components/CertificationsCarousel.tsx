@@ -18,44 +18,44 @@ import {
     figma,
     docker,
     threejs,
+    internship_1,
+    internship_2,
+    codeairCert,
+    vounterwork_certificate,
 } from "../assets";
 
 const certifications = [
     {
-        title: "Advanced React Patterns",
-        org: "Frontend Masters",
-        date: "Dec 2025",
-        image: reactjs,
-    },
-    {
-        title: "TensorFlow Developer",
-        org: "Google",
-        date: "Nov 2025",
-        image: python,
-    },
-    {
-        title: "AWS Cloud Practitioner",
-        org: "Amazon Web Services",
-        date: "Oct 2025",
-        image: docker,
-    },
-    {
-        title: "UI/UX Design Specialist",
+        title: "Coursera Certificate 1",
         org: "Coursera",
-        date: "Sep 2025",
-        image: figma,
-    },
-    {
-        title: "Modern C++ Development",
-        org: "Udemy",
-        date: "Aug 2025",
-        image: cpp,
-    },
-    {
-        title: "Full Stack Web Dev",
-        org: "Udacity",
-        date: "Jul 2025",
+        date: "2024",
         image: nodejs,
+        pdfLink: "/certificates/coursera_1.pdf",
+    },
+    {
+        title: "Coursera Certificate 2",
+        org: "Coursera",
+        date: "2024",
+        image: python,
+        pdfLink: "/certificates/coursera_2.pdf",
+    },
+    {
+        title: "Internship Certificate 1",
+        org: "Company",
+        date: "2024",
+        image: internship_1,
+    },
+    {
+        title: "Internship Certificate 2",
+        org: "Company",
+        date: "2024",
+        image: internship_2,
+    },
+    {
+        title: "Volunteer Work Certificate",
+        org: "Organization",
+        date: "2024",
+        image: vounterwork_certificate,
     },
 ];
 
@@ -135,12 +135,12 @@ const CertificationsCarousel = () => {
 
 const CertCard = ({ cert, offset, onClick }: any) => {
     const isActive = offset === 0;
-    const xDist = 380; // Spacing logic
+    const xDist = 560; // Spacing logic
 
     return (
         <motion.div
             onClick={onClick}
-            className={`absolute w-[320px] h-[500px] rounded-[24px] cursor-pointer`}
+            className={`absolute w-[500px] h-[440px] rounded-[24px] cursor-pointer`}
             initial={false}
             animate={{
                 x: offset * xDist,
@@ -167,21 +167,35 @@ const CertCard = ({ cert, offset, onClick }: any) => {
                 bg-[#1c1c2e] transition-all duration-500
             `}>
 
-                {/* 1. Top 75% - Image Area */}
-                <div className="w-full h-[75%] bg-black/40 relative flex items-center justify-center p-4 overflow-hidden group">
+                {/* 1. Top 80% - Image Area */}
+                <div className="w-full h-[80%] bg-black/40 relative flex items-center justify-center overflow-hidden group">
                     {/* Glossy gradient overlay */}
                     <div className="absolute inset-0 bg-gradient-to-b from-white/5 to-transparent pointer-events-none z-10" />
 
-                    <img
-                        src={cert.image}
-                        alt={cert.title}
-                        className={`w-full h-full object-contain transition-transform duration-700 ${isActive ? 'scale-105' : 'scale-90 opacity-80'}`}
-                    />
+                    {cert.pdfLink ? (
+                        <iframe
+                            src={cert.pdfLink + "#toolbar=0&navpanes=0&scrollbar=0&view=FitH"}
+                            className={`w-full h-full border-none pointer-events-none transition-transform duration-700 ${isActive ? 'scale-100' : 'scale-90 opacity-80'}`}
+                            title={cert.title}
+                        />
+                    ) : (
+                        <img
+                            src={cert.image}
+                            alt={cert.title}
+                            className={`w-full h-full object-contain transition-transform duration-700 p-4 ${isActive ? 'scale-105' : 'scale-90 opacity-80'}`}
+                        />
+                    )}
 
                     {/* View Button - Floating Eye Icon */}
                     <motion.div
                         whileHover={{ scale: 1.1 }}
-                        className="absolute bottom-4 right-4 bg-black/60 backdrop-blur-md p-3 rounded-full border border-white/20 shadow-lg z-20 hover:bg-white/20 transition-colors"
+                        onClick={(e) => {
+                            if (cert.pdfLink) {
+                                e.stopPropagation();
+                                window.open(cert.pdfLink, "_blank");
+                            }
+                        }}
+                        className={`absolute bottom-4 right-4 bg-black/60 backdrop-blur-md p-3 rounded-full border border-white/20 shadow-lg z-20 transition-colors ${cert.pdfLink ? 'hover:bg-white/20 cursor-pointer' : 'opacity-50'}`}
                     >
                         {/* Eye Icon SVG */}
                         <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-white">
@@ -191,8 +205,8 @@ const CertCard = ({ cert, offset, onClick }: any) => {
                     </motion.div>
                 </div>
 
-                {/* 2. Bottom 25% - Description Area (Glass) */}
-                <div className="w-full h-[25%] bg-white/5 backdrop-blur-xl border-t border-white/10 p-5 flex flex-col justify-center relative">
+                {/* 2. Bottom 20% - Description Area (Glass) */}
+                <div className="w-full h-[20%] bg-white/5 backdrop-blur-xl border-t border-white/10 p-4 flex flex-col justify-center relative">
                     <h3 className="text-white font-bold text-lg leading-tight line-clamp-1">{cert.title}</h3>
                     <p className="text-gray-400 text-sm mt-1 line-clamp-2">
                         {cert.org} certification completed in {cert.date}. Specialized training & verified skills.

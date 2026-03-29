@@ -74,7 +74,7 @@ export const Hero = () => {
             </a>
 
             {/* Download CV - Subtle Border Button */}
-            <a href="/resume.pdf" target="_blank" className="px-6 py-3 bg-white/5 border border-white/10 rounded-lg text-white font-medium hover:bg-white/10 hover:border-cyan-500/30 transition-all duration-300">
+            <a href="/CV_AreejAnwaar_.pdf" target="_blank" className="px-6 py-3 bg-white/5 border border-white/10 rounded-lg text-white font-medium hover:bg-white/10 hover:border-cyan-500/30 transition-all duration-300">
               Download CV
             </a>
 

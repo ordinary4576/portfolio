@@ -35,6 +35,8 @@ import {
   youtube,
   linkedin,
   twitter,
+  github,
+  mail,
 
   karma,
   alkhidmat,
@@ -42,6 +44,15 @@ import {
   projectPlaceholder,
   cyberpunkVideo,
   codeairCert,
+  pizza1,
+  pizza2,
+  pizza3,
+  servify_vid,
+  game1,
+  game2,
+  game3,
+  game4,
+  cpuScheduler,
 } from "../assets";
 
 // Navbar Links
@@ -73,7 +84,7 @@ export const NAV_LINKS = [
   {
     id: "resume",
     title: "Resume",
-    link: "",
+    link: "#resume",
   },
   {
     id: "contact",
@@ -278,25 +289,47 @@ export const TESTIMONIALS = [
 // Projects
 export const PROJECTS = [
   {
-    name: "Ticket Management System",
+    name: "Servify",
     description:
-      "A console-based system to manage ticket bookings, cancellations, and customer records. Built with C++ and OOP principles, featuring error handling and validation for smooth user interaction.",
+      "Servify to serve people. A dedicated platform aimed at providing community serving solutions and connecting people dynamically.",
+    tags: [
+      {
+        name: "react",
+        color: "blue-text-gradient",
+      },
+      {
+        name: "javascript",
+        color: "green-text-gradient",
+      },
+      {
+        name: "css",
+        color: "pink-text-gradient",
+      },
+    ],
+    image: projectPlaceholder,
+    video: servify_vid,
+    source_code_link: "https://github.com/ordinary4576/servify.git",
+  },
+  {
+    name: "Scheduling Algorithms Simulator",
+    description:
+      "An OS end-semester project that simulates how tasks are scheduled in the CPU under different algorithms like FCFS, Round Robin, SJF, and Priority Scheduling. The instructor was so impressed she bought it for personal use. Features interactive visualization of process scheduling with Gantt charts and performance metrics.",
     tags: [
       {
         name: "c++",
         color: "blue-text-gradient",
       },
       {
-        name: "oop",
+        name: "operating-systems",
         color: "green-text-gradient",
       },
       {
-        name: "console",
+        name: "simulation",
         color: "pink-text-gradient",
       },
     ],
-    image: projectPlaceholder,
-    source_code_link: "",
+    image: cpuScheduler,
+    source_code_link: "https://github.com/zeechanch/Scheduling-Algorithms-Simulator.git",
     live_site_link: "",
   },
   {
@@ -317,30 +350,9 @@ export const PROJECTS = [
         color: "pink-text-gradient",
       },
     ],
-    image: projectPlaceholder,
-    source_code_link: "",
-    live_site_link: "",
-  },
-  {
-    name: "Hotel Management DB",
-    description:
-      "Relational database to manage hotel reservations, customer records, and billing. Designed normalized schemas and wrote complex SQL queries for reporting and analytics.",
-    tags: [
-      {
-        name: "oracle-sql",
-        color: "blue-text-gradient",
-      },
-      {
-        name: "database",
-        color: "green-text-gradient",
-      },
-      {
-        name: "analytics",
-        color: "pink-text-gradient",
-      },
-    ],
-    image: projectPlaceholder,
-    source_code_link: "",
+    image: game1,
+    images: [game1, game2, game3, game4],
+    source_code_link: "https://github.com/ordinary4576/game.git",
     live_site_link: "",
   },
   {
@@ -427,8 +439,9 @@ export const PROJECTS = [
         color: "pink-text-gradient",
       },
     ],
-    image: projectPlaceholder,
-    source_code_link: "",
+    image: pizza1,
+    images: [pizza1, pizza2, pizza3],
+    source_code_link: "https://github.com/231969-max/pizza-eccomerce-project.git",
     live_site_link: "",
   },
   {
@@ -459,18 +472,18 @@ export const PROJECTS = [
 
 export const SOCIALS = [
   {
-    name: "YouTube",
-    icon: youtube,
-    link: "https://www.youtube.com/@OPGAMER.",
-  },
-  {
     name: "Linkedin",
     icon: linkedin,
-    link: "https://www.linkedin.com/in/sanidhyy",
+    link: "https://www.linkedin.com/in/areej-anwaar-3677272aa/",
   },
   {
-    name: "Twitter",
-    icon: twitter,
-    link: "https://x.com/_sanidhyy",
+    name: "GitHub",
+    icon: github,
+    link: "https://github.com/231969-max",
+  },
+  {
+    name: "Email",
+    icon: mail,
+    link: "mailto:areejanwaar17@gmail.com",
   },
 ] as const;

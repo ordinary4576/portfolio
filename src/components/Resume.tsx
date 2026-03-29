@@ -34,7 +34,7 @@ const Resume = () => {
 
                         {/* PDF Viewer */}
                         <iframe
-                            src="/resume.pdf"
+                            src="/CV_AreejAnwaar_.pdf"
                             className="w-full h-full object-cover"
                             onLoad={() => setLoading(false)}
                             title="Areej Anwaar Resume"
@@ -50,8 +50,8 @@ const Resume = () => {
 
                         {/* Download Button */}
                         <a
-                            href="/resume.pdf"
-                            download="Areej_Anwaar_Resume.pdf"
+                            href="/CV_AreejAnwaar_.pdf"
+                            download="CV_AreejAnwaar_.pdf"
                             className="px-8 py-4 rounded-xl bg-gradient-to-r from-cyan-600 to-blue-600 text-white font-bold text-lg shadow-lg shadow-cyan-500/20 hover:shadow-cyan-500/40 hover:-translate-y-1 transition-all duration-300 flex items-center gap-2 group w-full md:w-auto justify-center"
                         >
                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className="w-6 h-6 group-hover:scale-110 transition-transform">
@@ -62,7 +62,7 @@ const Resume = () => {
 
                         {/* View Fullscreen Button */}
                         <a
-                            href="/resume.pdf"
+                            href="/CV_AreejAnwaar_.pdf"
                             target="_blank"
                             rel="noopener noreferrer"
                             className="px-8 py-4 rounded-xl bg-transparent border-2 border-purple-500/50 text-white font-bold text-lg hover:bg-purple-500/10 hover:border-purple-500 hover:shadow-[0_0_20px_rgba(168,85,247,0.3)] hover:-translate-y-1 transition-all duration-300 flex items-center gap-2 w-full md:w-auto justify-center"

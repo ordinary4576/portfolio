@@ -78,8 +78,8 @@ export const About = () => {
 
 
                 <div className="text-gray-300 text-lg leading-relaxed mb-6 text-center font-medium">
-                  <p>Teamwork 🤝 • Leadership ⭐ • Clear Communication 💬</p>
-                  <p className="mt-2">Reliable • Detail-Oriented • Fast Learner 🚀</p>
+                  <p>Teamwork • Leadership • Clear Communication</p>
+                  <p className="mt-2">Reliable • Detail-Oriented • Fast Learner</p>
                 </div>
 
                 <div>
@@ -106,17 +106,7 @@ export const About = () => {
       </div>
 
 
-      <div className="w-full hidden md:flex items-start justify-center absolute top-[0] -z-10 opacity-50">
-        <video
-          loop
-          muted
-          autoPlay
-          playsInline
-          preload="false"
-          className="w-full h-full object-cover"
-          src="/encryption.webm"
-        />
-      </div>
+
     </section>
   );
 };
