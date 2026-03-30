@@ -1,11 +1,9 @@
 "use client";
 import React from "react";
-
+import { areejProfile } from "../assets";
 import { motion } from "framer-motion";
-import { slideInFromBottom, slideInFromLeft, slideInFromRight, slideInFromTop } from "../utils/motion";
+import { slideInFromLeft, slideInFromRight, slideInFromTop } from "../utils/motion";
 import { InView } from "react-intersection-observer";
-
-// user1 import removed
 
 export const About = () => {
   return (
@@ -13,6 +11,19 @@ export const About = () => {
       id="about"
       className="flex flex-col relative items-center justify-center min-h-screen w-full py-10 md:py-20 overflow-hidden"
     >
+      {/* Background Binary Animation - Centralized & Large */}
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full max-w-[1400px] max-h-[1400px] z-[0] opacity-50 pointer-events-none overflow-hidden">
+        <video
+          autoPlay
+          muted
+          loop
+          playsInline
+          className="w-full h-full object-cover"
+        >
+          <source src="/encryption.webm" type="video/webm" />
+        </video>
+      </div>
+
       {/* Title */}
       <div className="relative z-[5] mb-12 md:mb-20">
         <InView triggerOnce={false}>
@@ -45,24 +56,13 @@ export const About = () => {
                 initial={{ opacity: 0, scale: 0.8 }}
                 whileInView={{ opacity: 1, scale: 1 }}
                 transition={{ duration: 1.2, ease: "easeOut" }}
-                className="group relative flex items-center justify-center w-[300px] h-[300px] md:w-[400px] md:h-[400px] rounded-full overflow-hidden border-[6px] border-[#7042f88b] shadow-[0_0_50px_rgba(112,66,248,0.4)]"
+                className="group relative flex items-center justify-center w-[300px] h-[300px] md:w-[400px] md:h-[400px] rounded-full overflow-hidden border-[6px] border-[#7042f88b] bg-[rgba(3,0,20,0.4)] backdrop-blur-sm shadow-[0_0_50px_rgba(112,66,248,0.4)]"
               >
-                {/* Binary Animation Video Background */}
-                <video
-                  autoPlay
-                  muted
-                  loop
-                  playsInline
-                  className="absolute inset-0 w-full h-full object-cover opacity-60 z-0"
-                >
-                  <source src="/encryption.webm" type="video/webm" />
-                </video>
-
-                {/* Profile Image - Slightly smaller to show animation around/behind */}
+                {/* Profile Image */}
                 <img
-                  src="/profile-pic.jpg"
+                  src={areejProfile}
                   alt="Areej Anwaar"
-                  className="relative z-10 w-[85%] h-[85%] rounded-full object-cover border-4 border-[#7042f844] shadow-2xl transition-transform duration-500 group-hover:scale-105"
+                  className="relative z-10 w-[90%] h-[90%] rounded-full object-cover border-4 border-[#7042f844] shadow-2xl transition-transform duration-500 group-hover:scale-105"
                 />
 
                 {/* Pulsing Overlay Glow */}

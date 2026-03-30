@@ -10,7 +10,7 @@ import menu from "./menu.svg";
 import mobile from "./mobile.png";
 import preview from "./preview.png";
 import web from "./web.png";
-import areejProfile from "./areej_profile.png";
+import areejProfile from "./profile_headshot.jpg";
 import projectPlaceholder from "./project_placeholder.png";
 
 import css from "./tech/css.png";
