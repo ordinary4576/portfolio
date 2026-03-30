@@ -26,11 +26,11 @@ const Computers = ({ isMobile, scale }: ComputersProps) => {
         penumbra={1}
         intensity={1}
         castShadow
-        shadow-mapSize={1024}
+        shadow-mapSize={isMobile ? 512 : 1024}
       />
       <primitive
         object={computer.scene}
-        scale={scale !== undefined ? scale : isMobile ? 0.7 : 0.75}
+        scale={scale !== undefined ? scale : isMobile ? 0.6 : 0.75}
         position={isMobile ? [0, -3, -2.2] : [0, -3.25, -1.5]}
         rotation={[-0.01, -0.2, -0.1]}
       />
@@ -64,9 +64,9 @@ const ComputersCanvas = ({ scale }: { scale?: number }) => {
   return (
     <Canvas
       frameloop="demand"
-      shadows
+      shadows={!isMobile}
       camera={{ position: [20, 3, 5], fov: 25 }}
-      gl={{ preserveDrawingBuffer: true, alpha: true }}
+      gl={{ preserveDrawingBuffer: true, alpha: true, antialias: !isMobile }}
     >
       {/* Canvas Loader show on fallback */}
       <Suspense fallback={<CanvasLoader />}>

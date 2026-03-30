@@ -147,7 +147,7 @@ export const Works = () => {
         </div>
 
         {/* Project Card */}
-        <div className="mt-20 flex flex-wrap gap-7 relative z-10">
+        <div className="mt-20 flex flex-wrap gap-7 justify-center relative z-10">
           {PROJECTS.map((project, i) => (
             <ProjectCard key={`project-${i}`} index={i} onClick={() => setSelectedProject(project)} {...project} />
           ))}

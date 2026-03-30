@@ -63,7 +63,21 @@ const certifications = [
 const CertificationsCarousel = () => {
     const [activeIndex, setActiveIndex] = useState(0);
     const [isHovered, setIsHovered] = useState(false);
+    const [isMobile, setIsMobile] = useState(false);
     const length = certifications.length;
+
+    // Check for mobile
+    useEffect(() => {
+        const mediaQuery = window.matchMedia("(max-width: 768px)");
+        setIsMobile(mediaQuery.matches);
+
+        const handleMediaQueryChange = (event: MediaQueryListEvent) => {
+            setIsMobile(event.matches);
+        };
+
+        mediaQuery.addEventListener("change", handleMediaQueryChange);
+        return () => mediaQuery.removeEventListener("change", handleMediaQueryChange);
+    }, []);
 
     // Auto-scroll effect - Pauses on hover
     useEffect(() => {
@@ -81,18 +95,18 @@ const CertificationsCarousel = () => {
 
     return (
         <SectionWrapper idName="certifications">
-            <div className="flex flex-col items-center justify-center relative min-h-[800px] overflow-hidden">
+            <div className="flex flex-col items-center justify-center relative min-h-[600px] md:min-h-[800px] overflow-hidden">
                 {/* Background Glow */}
-                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[400px] bg-purple-900/20 blur-[100px] rounded-full pointer-events-none" />
+                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[300px] md:w-[600px] h-[200px] md:h-[400px] bg-purple-900/20 blur-[100px] rounded-full pointer-events-none" />
 
-                <motion.div variants={textVariant()} className="z-10 relative mb-16">
+                <motion.div variants={textVariant()} className="z-10 relative mb-8 md:mb-16">
                     <p className={`${styles.sectionSubText} text-center`}>My achievements</p>
                     <h2 className={`${styles.sectionHeadText} text-center`}>Certifications.</h2>
                 </motion.div>
 
                 <div
-                    className="relative w-full max-w-7xl h-[600px] flex justify-center items-center"
-                    style={{ perspective: "1200px" }}
+                    className="relative w-full max-w-7xl h-[450px] md:h-[600px] flex justify-center items-center"
+                    style={{ perspective: isMobile ? "800px" : "1200px" }}
                     onMouseEnter={() => setIsHovered(true)}
                     onMouseLeave={() => setIsHovered(false)}
                 >
@@ -102,7 +116,7 @@ const CertificationsCarousel = () => {
                         if (offset > length / 2) offset -= length;
 
                         // Strict visibility: Center + 1 Left + 1 Right
-                        const isVisible = Math.abs(offset) <= 2;
+                        const isVisible = Math.abs(offset) <= (isMobile ? 1 : 2);
 
                         if (!isVisible) return null;
 
@@ -112,17 +126,18 @@ const CertificationsCarousel = () => {
                                 cert={cert}
                                 offset={offset}
                                 onClick={() => setActiveIndex(index)}
+                                isMobile={isMobile}
                             />
                         );
                     })}
 
                     {/* Navigation Arrows */}
-                    <div className="absolute inset-x-0 top-1/2 -translate-y-1/2 flex justify-between px-4 md:px-32 pointer-events-none z-50">
-                        <button onClick={handlePrev} className="pointer-events-auto p-3 rounded-full bg-white/5 border border-white/10 hover:bg-white/10 backdrop-blur-md transition-all group">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-white group-hover:-translate-x-0.5 transition-transform"><path d="m15 18-6-6 6-6" /></svg>
+                    <div className="absolute inset-x-0 top-1/2 -translate-y-1/2 flex justify-between px-2 md:px-32 pointer-events-none z-50">
+                        <button onClick={handlePrev} className="pointer-events-auto p-2 md:p-3 rounded-full bg-white/10 border border-white/20 hover:bg-white/20 backdrop-blur-md transition-all group">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-white group-hover:-translate-x-0.5 transition-transform"><path d="m15 18-6-6 6-6" /></svg>
                         </button>
-                        <button onClick={handleNext} className="pointer-events-auto p-3 rounded-full bg-white/5 border border-white/10 hover:bg-white/10 backdrop-blur-md transition-all group">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-white group-hover:translate-x-0.5 transition-transform"><path d="m9 18 6-6-6-6" /></svg>
+                        <button onClick={handleNext} className="pointer-events-auto p-2 md:p-3 rounded-full bg-white/10 border border-white/20 hover:bg-white/20 backdrop-blur-md transition-all group">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-white group-hover:translate-x-0.5 transition-transform"><path d="m9 18 6-6-6-6" /></svg>
                         </button>
                     </div>
                 </div>
@@ -133,42 +148,44 @@ const CertificationsCarousel = () => {
 };
 
 
-const CertCard = ({ cert, offset, onClick }: any) => {
+const CertCard = ({ cert, offset, onClick, isMobile }: any) => {
     const isActive = offset === 0;
-    const xDist = 560; // Spacing logic
+    const xDist = isMobile ? 320 : 560; // Spacing logic
 
     return (
         <motion.div
             onClick={onClick}
-            className={`absolute w-[500px] h-[440px] rounded-[24px] cursor-pointer`}
+            className="absolute"
             initial={false}
             animate={{
                 x: offset * xDist,
-                y: isActive ? 0 : 0,
-                z: isActive ? 0 : -100, // Z handling matched to Scale
-                rotateY: offset * -45,
-                scale: isActive ? 1.2 : 0.8,
+                y: 0,
+                z: isActive ? 0 : -100, 
+                rotateY: offset * (isMobile ? -30 : -45),
+                scale: isActive ? (isMobile ? 0.9 : 1.2) : (isMobile ? 0.6 : 0.8),
                 opacity: isActive ? 1 : 0.6,
                 zIndex: 100 - Math.abs(offset),
             }}
             transition={{
                 duration: 0.8,
-                ease: [0.25, 0.8, 0.25, 1], // Custom cubic-bezier for "heavy" feel
+                ease: [0.25, 0.8, 0.25, 1], 
             }}
             style={{
                 transformStyle: "preserve-3d",
                 transformOrigin: "center",
+                width: isMobile ? "280px" : "500px",
+                height: isMobile ? "350px" : "440px",
             }}
         >
             {/* Card Container */}
             <div className={`
-                w-full h-full rounded-[24px] overflow-hidden flex flex-col
+                w-full h-full rounded-[20px] md:rounded-[24px] overflow-hidden flex flex-col
                 ${isActive ? 'shadow-[0_10px_50px_rgba(0,0,0,0.5)] ring-1 ring-white/20' : 'shadow-lg ring-1 ring-white/10'}
                 bg-[#1c1c2e] transition-all duration-500
             `}>
 
-                {/* 1. Top 80% - Image Area */}
-                <div className="w-full h-[80%] bg-black/40 relative flex items-center justify-center overflow-hidden group">
+                {/* 1. Top 75% - Image Area */}
+                <div className="w-full h-[75%] bg-black/40 relative flex items-center justify-center overflow-hidden group">
                     {/* Glossy gradient overlay */}
                     <div className="absolute inset-0 bg-gradient-to-b from-white/5 to-transparent pointer-events-none z-10" />
 
@@ -182,7 +199,7 @@ const CertCard = ({ cert, offset, onClick }: any) => {
                         <img
                             src={cert.image}
                             alt={cert.title}
-                            className={`w-full h-full object-contain transition-transform duration-700 p-4 ${isActive ? 'scale-105' : 'scale-90 opacity-80'}`}
+                            className={`w-full h-full object-contain transition-transform duration-700 p-3 md:p-4 ${isActive ? 'scale-105' : 'scale-90 opacity-80'}`}
                         />
                     )}
 
@@ -195,21 +212,21 @@ const CertCard = ({ cert, offset, onClick }: any) => {
                                 window.open(cert.pdfLink, "_blank");
                             }
                         }}
-                        className={`absolute bottom-4 right-4 bg-black/60 backdrop-blur-md p-3 rounded-full border border-white/20 shadow-lg z-20 transition-colors ${cert.pdfLink ? 'hover:bg-white/20 cursor-pointer' : 'opacity-50'}`}
+                        className={`absolute bottom-3 right-3 bg-black/60 backdrop-blur-md p-2 md:p-3 rounded-full border border-white/20 shadow-lg z-20 transition-colors ${cert.pdfLink ? 'hover:bg-white/20 cursor-pointer' : 'opacity-50'}`}
                     >
                         {/* Eye Icon SVG */}
-                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-white">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" md:width="20" md:height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-white">
                             <path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z" />
                             <circle cx="12" cy="12" r="3" />
                         </svg>
                     </motion.div>
                 </div>
 
-                {/* 2. Bottom 20% - Description Area (Glass) */}
-                <div className="w-full h-[20%] bg-white/5 backdrop-blur-xl border-t border-white/10 p-4 flex flex-col justify-center relative">
-                    <h3 className="text-white font-bold text-lg leading-tight line-clamp-1">{cert.title}</h3>
-                    <p className="text-gray-400 text-sm mt-1 line-clamp-2">
-                        {cert.org} certification completed in {cert.date}. Specialized training & verified skills.
+                {/* 2. Bottom 25% - Description Area (Glass) */}
+                <div className="w-full h-[25%] bg-white/5 backdrop-blur-xl border-t border-white/10 p-3 md:p-4 flex flex-col justify-center relative">
+                    <h3 className="text-white font-bold text-sm md:text-lg leading-tight line-clamp-1">{cert.title}</h3>
+                    <p className="text-gray-400 text-[10px] md:text-sm mt-1 line-clamp-2">
+                        {cert.org} certification. {cert.date}.
                     </p>
 
                     {/* Subtle Glow at bottom */}
@@ -220,7 +237,7 @@ const CertCard = ({ cert, offset, onClick }: any) => {
 
             {/* Ground Reflection Shadow */}
             {isActive && (
-                <div className="absolute -bottom-16 left-4 right-4 h-4 bg-black/60 blur-xl rounded-[100%] opacity-60" />
+                <div className="absolute -bottom-10 md:-bottom-16 left-4 right-4 h-3 md:h-4 bg-black/60 blur-xl rounded-[100%] opacity-60" />
             )}
 
         </motion.div>
