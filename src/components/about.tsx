@@ -11,8 +11,8 @@ export const About = () => {
       id="about"
       className="flex flex-col relative items-center justify-center min-h-screen w-full py-10 md:py-20 overflow-hidden"
     >
-      {/* Background Binary Animation - Centralized & Large */}
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full max-w-[1400px] max-h-[1400px] z-[0] opacity-50 pointer-events-none overflow-hidden">
+      {/* Background Binary Animation - Centralized & Layered Properly */}
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full max-w-[1400px] max-h-[1400px] z-[1] opacity-60 pointer-events-none overflow-hidden">
         <video
           autoPlay
           muted
@@ -25,7 +25,7 @@ export const About = () => {
       </div>
 
       {/* Title */}
-      <div className="relative z-[5] mb-12 md:mb-20">
+      <div className="relative z-[10] mb-12 md:mb-20">
         <InView triggerOnce={false}>
           {({ inView, ref }) => (
             <motion.div
@@ -143,3 +143,4 @@ export const About = () => {
     </section>
   );
 };
+
