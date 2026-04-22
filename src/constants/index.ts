@@ -46,6 +46,14 @@ import {
   cpuScheduler,
 } from "../assets";
 
+export const PERSONAL_INFO = {
+  name: import.meta.env.VITE_USER_NAME || "Example User",
+  email: import.meta.env.VITE_USER_EMAIL || "user@example.com",
+  linkedin: import.meta.env.VITE_LINKEDIN_URL || "https://linkedin.com",
+  github: import.meta.env.VITE_GITHUB_URL || "https://github.com",
+  cv: import.meta.env.VITE_CV_URL || "/resume.pdf",
+};
+
 // Navbar Links
 export const NAV_LINKS = [
   {
@@ -64,6 +72,7 @@ export const NAV_LINKS = [
     link: "",
   },
   {
+    id: "experience",
     title: "Experience",
     link: "",
   },
@@ -465,16 +474,17 @@ export const SOCIALS = [
   {
     name: "Linkedin",
     icon: linkedin,
-    link: "https://www.linkedin.com/in/areej-anwaar-3677272aa/",
+    link: PERSONAL_INFO.linkedin,
   },
   {
     name: "GitHub",
     icon: github,
-    link: "https://github.com/231969-max",
+    link: PERSONAL_INFO.github,
   },
   {
     name: "Email",
     icon: mail,
-    link: "mailto:areejanwaar17@gmail.com",
+    link: "javascript:void(0)", // Use onClick in component to prevent scraping
+    isEmail: true,
   },
 ] as const;

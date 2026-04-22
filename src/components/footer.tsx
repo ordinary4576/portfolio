@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 
-import { SOCIALS } from "../constants";
+import { SOCIALS, PERSONAL_INFO } from "../constants";
 import { styles } from "../styles";
 import { cn } from "../utils/lib";
 
@@ -15,7 +15,7 @@ const Footer = () => {
     >
       <div className="w-full flex justify-between items-center max-w-7xl mx-auto">
         <p className="text-white text-md font-bold flex">
-          AreejAnwaar 2026. All rights reserved.
+          {PERSONAL_INFO.name} {(new Date()).getFullYear()}. All rights reserved.
         </p>
 
         {/* Nav Links (Desktop) */}
@@ -25,9 +25,21 @@ const Footer = () => {
               key={social.name}
               className="text-secondary font-poppins font-medium cursor-pointer text-[16px] opacity-80 hover:opacity-100 transition"
             >
-              <Link to={social.link} target="_blank" rel="noreferrer noopener">
-                <img src={social.icon} alt={social.name} className="h-6 w-6" />
-              </Link>
+              {'isEmail' in social ? (
+                <button
+                  type="button"
+                  onClick={() => {
+                    window.location.href = `mailto:${PERSONAL_INFO.email}`;
+                  }}
+                  className="bg-transparent border-none p-0 cursor-pointer"
+                >
+                  <img src={social.icon} alt={social.name} className="h-6 w-6" />
+                </button>
+              ) : (
+                <Link to={social.link} target="_blank" rel="noreferrer noopener">
+                  <img src={social.icon} alt={social.name} className="h-6 w-6" />
+                </Link>
+              )}
             </li>
           ))}
         </ul>

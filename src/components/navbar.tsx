@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 
 import { logo, menu, close } from "../assets";
-import { NAV_LINKS, SOCIALS } from "../constants";
+import { NAV_LINKS, SOCIALS, PERSONAL_INFO } from "../constants";
 import { cn } from "../utils/lib";
 
 type NavbarProps = {
@@ -70,7 +70,7 @@ export const Navbar = ({ hide }: NavbarProps) => {
             className="cursor-pointer hover:animate-spin w-10 h-10 object-contain"
           />
           <span className="font-bold ml-[10px] hidden md:block text-gray-300">
-            Areej Anwaar
+            {PERSONAL_INFO.name}
           </span>
         </Link>
 
@@ -110,20 +110,39 @@ export const Navbar = ({ hide }: NavbarProps) => {
           {/* Social Icons (Desktop/Mobile) */}
           <div className="flex flex-row gap-5">
             {SOCIALS.map((social) => (
-              <a
-                href={social.link}
-                key={social.name}
-                target="_blank"
-                rel="noreferrer noopener"
-              >
-                <img
-                  src={social.icon}
-                  alt={social.name}
-                  width={24}
-                  height={24}
-                  className="cursor-pointer hover:animate-spin"
-                />
-              </a>
+              'isEmail' in social ? (
+                <button
+                  key={social.name}
+                  type="button"
+                  onClick={() => {
+                    window.location.href = `mailto:${PERSONAL_INFO.email}`;
+                  }}
+                  className="bg-transparent border-none p-0 cursor-pointer"
+                >
+                  <img
+                    src={social.icon}
+                    alt={social.name}
+                    width={24}
+                    height={24}
+                    className="hover:animate-spin"
+                  />
+                </button>
+              ) : (
+                <a
+                  href={social.link}
+                  key={social.name}
+                  target="_blank"
+                  rel="noreferrer noopener"
+                >
+                  <img
+                    src={social.icon}
+                    alt={social.name}
+                    width={24}
+                    height={24}
+                    className="cursor-pointer hover:animate-spin"
+                  />
+                </a>
+              )
             ))}
           </div>
 

@@ -7,6 +7,7 @@ import { EarthCanvas } from "./canvas";
 import { SectionWrapper } from "../hoc";
 import { styles } from "../styles";
 import { slideIn } from "../utils/motion";
+import { PERSONAL_INFO } from "../constants";
 
 // Contact
 export const Contact = () => {
@@ -98,7 +99,7 @@ export const Contact = () => {
         import.meta.env.VITE_APP_TEMPLATE_ID,
         {
           from_name: form.name,
-          to_name: "Areej Anwaar",
+          to_name: PERSONAL_INFO.name,
           from_email: form.email.trim().toLowerCase(),
           to_email: import.meta.env.VITE_APP_EMAILJS_RECIEVER,
           message: form.message,
@@ -147,7 +148,7 @@ export const Contact = () => {
                 id="name"
                 value={form.name}
                 onChange={handleChange}
-                placeholder="Areej Anwaar"
+                placeholder="John Doe"
                 title="What's your name?"
                 disabled={loading}
                 aria-disabled={loading}
@@ -169,7 +170,7 @@ export const Contact = () => {
                 id="email"
                 value={form.email}
                 onChange={handleChange}
-                placeholder="areejanwaar17@gmail.com"
+                placeholder="johndoe@gmail.com"
                 title="What's your email?"
                 disabled={loading}
                 aria-disabled={loading}

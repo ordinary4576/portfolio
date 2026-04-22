@@ -3,6 +3,7 @@ import { motion } from "framer-motion";
 import { styles } from "../styles";
 import { cn } from "../utils/lib";
 import { areejProfile, cpp, python, html, css, figma, opencv } from "../assets";
+import { PERSONAL_INFO } from "../constants";
 
 export const Hero = () => {
   return (
@@ -72,7 +73,7 @@ export const Hero = () => {
             </a>
 
             {/* Download CV - Subtle Border Button */}
-            <a href="/CV_AreejAnwaar_.pdf" target="_blank" className="px-6 py-3 bg-white/5 border border-white/10 rounded-lg text-white font-medium hover:bg-white/10 hover:border-cyan-500/30 transition-all duration-300">
+            <a href={PERSONAL_INFO.cv} target="_blank" rel="noopener noreferrer" className="px-6 py-3 bg-white/5 border border-white/10 rounded-lg text-white font-medium hover:bg-white/10 hover:border-cyan-500/30 transition-all duration-300">
               Download CV
             </a>
 
